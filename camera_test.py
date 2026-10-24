@@ -1,6 +1,10 @@
 import cv2
+import os
 
-stream_url = "http://192.168.1.36:8080/video"
+stream_url = os.getenv(
+    "CAMERA_STREAM_URL",
+    "http://127.0.0.1:8080/video"
+)
 cap = cv2.VideoCapture(stream_url)
 cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 if not cap.isOpened():
