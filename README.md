@@ -109,7 +109,11 @@ Ensure the dependencies used by the current implementation are included in `requ
 
 ### 5. Configure the camera stream
 
-Start the camera-streaming application on your smartphone and obtain its video-stream URL.
+Start the camera-streaming application on your smartphone and obtain its video-stream URL. Set `CAMERA_STREAM_URL` in the root `.env` file (created for local configuration) to that URL:
+
+```env
+CAMERA_STREAM_URL=http://<PHONE_IP>:8080/video
+```
 
 The current development setup uses an IP Webcam-style endpoint:
 
