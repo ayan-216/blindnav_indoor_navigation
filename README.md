@@ -109,11 +109,14 @@ Ensure the dependencies used by the current implementation are included in `requ
 
 ### 5. Configure the camera stream
 
-Start the camera-streaming application on your smartphone and obtain its video-stream URL. Set `CAMERA_STREAM_URL` in the root `.env` file (created for local configuration) to that URL:
+Start the camera-streaming application on your smartphone and obtain its video-stream URL. Set `CAMERA_STREAM_URL` and `VISION_MODAL` in the root `.env` file (created for local configuration):
 
 ```env
 CAMERA_STREAM_URL=http://<PHONE_IP>:8080/video
+VISION_MODAL=yolo26n.pt
 ```
+
+`VISION_MODAL` should contain the path to the YOLO model file. It defaults to `yolo26n.pt` when unset.
 
 The current development setup uses an IP Webcam-style endpoint:
 
@@ -196,18 +199,17 @@ Combines the current components into a real-time testing pipeline:
 
 The current `yolo26n.pt` model is a pretrained general-purpose object detector. Its supported classes depend on the model's training dataset and do not automatically include every indoor-navigation category.
 
-The `ObjectDetector` class accepts a configurable model path:
+The `ObjectDetector` class uses the `VISION_MODAL` environment variable by default and also accepts an explicit model path:
 
 ```python
 from vision.detector import ObjectDetector
 
 detector = ObjectDetector(
-    model_path="yolo26n.pt",
     confidence=0.35,
 )
 ```
 
-When a custom-trained model becomes available, configure the detector to use its file:
+To use a custom-trained model, set `VISION_MODAL` in `.env` to its path (for example, `models/blindnav_best.pt`) or pass the path explicitly:
 
 ```python
 detector = ObjectDetector(
