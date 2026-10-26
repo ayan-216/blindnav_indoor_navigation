@@ -44,16 +44,17 @@ blindNav/
 ├── utils/
 │   └── metrics.py
 ├── models/                     # Optional location for custom models
+├── modals/
+│   └── yolo26n.pt               # Current pretrained model
 ├── camera_test.py              # Basic camera test
 ├── test_camera_stream.py       # CameraStream test
 ├── test_camera_metrics.py      # Metrics test
 ├── test_live_detection.py      # Live end-to-end detection test
-├── yolo26n.pt                  # Current pretrained model
 ├── requirements.txt
 └── README.md
 ```
 
-The `models/` directory is intended for custom model files when available. The structure above describes the intended layout; optional directories and test files may be added as development continues.
+The `models/` directory is intended for custom model files when available. The pretrained `yolo26n.pt` model is stored in `modals/`.
 
 ## Getting Started
 
@@ -113,10 +114,10 @@ Start the camera-streaming application on your smartphone and obtain its video-s
 
 ```env
 CAMERA_STREAM_URL=http://<PHONE_IP>:8080/video
-VISION_MODAL=yolo26n.pt
+VISION_MODAL=modals/yolo26n.pt
 ```
 
-`VISION_MODAL` should contain the path to the YOLO model file. It defaults to `yolo26n.pt` when unset.
+`VISION_MODAL` should contain the path to the YOLO model file. It defaults to `modals/yolo26n.pt` when unset.
 
 The current development setup uses an IP Webcam-style endpoint:
 
@@ -266,4 +267,4 @@ When contributing:
 
 ## License
 
-A license has not yet been specified. Add a `LICENSE` file before distributing the project under an open-source license.
+This project is licensed under the [MIT License](LICENSE).
