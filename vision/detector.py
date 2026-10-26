@@ -12,7 +12,13 @@ class ObjectDetector:
         confidence: float = 0.35,
     ):
         if model_path is None:
-            model_path = os.getenv("VISION_MODAL", "yolo26n.pt")
+            model_path = os.getenv("VISION_MODAL")
+            if model_path is None:
+                model_path = str(
+                    Path(__file__).resolve().parent.parent
+                    / "modals"
+                    / "yolo26n.pt"
+                )
 
         model_file = Path(model_path)
 
